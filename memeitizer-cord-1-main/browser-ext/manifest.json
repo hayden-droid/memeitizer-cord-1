@@ -1,0 +1,55 @@
+{
+  "name": "Memeitizer-Load",
+  "author": "Memeitizer Limited",
+  "homepage_url": "https://tiktok.com/@the.new.memeitizer",
+  "description": "Memeitizer-Cord is a lightweight Discord\u2122 client modification, now in your browser.",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "version": "2.0",
+  "manifest_version": 2,
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.discord.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "src/stdlib.js",
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.discord.com/*"
+      ],
+      "js": [
+        "src/stdlib.js",
+        "src/loader.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>",
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.discord.com/*"
+      ],
+      "js": [
+        "src/stdlib.js",
+        "src/ipc.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "MemeitizerCord@example.com"
+    }
+  }
+}
