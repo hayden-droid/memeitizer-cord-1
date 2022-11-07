@@ -1,0 +1,38 @@
+{
+    "version": "2.0",
+    "name":"Memeitizer-Cord",
+    "manifest_version": 2,
+
+    "permissions": [
+        "webRequest",
+        "webRequestBlocking",
+        "*://*.discord.com/*"
+    ],
+    
+    "background": {
+        "scripts": [ "src/stdlib.js", "src/background.js" ]
+    },
+
+    "content_scripts": [
+        {
+            "matches": [ "*://*.discord.com/*" ],
+
+            "js": [ "src/stdlib.js", "src/loader.js"],
+			"run_at": "document_end"
+        },
+
+		{
+			"matches": [ "<all_urls>", "*://*/*" ],
+			"exclude_matches": [ "*://*.discord.com/*" ],
+
+			"js": [ "src/stdlib.js", "src/ipc.js" ],
+			"run_at": "document_end"
+		}
+    ],
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "memeitizer@memeitizer.net"
+        }
+    }
+}
